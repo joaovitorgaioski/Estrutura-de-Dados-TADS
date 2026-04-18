@@ -1,4 +1,4 @@
-package br.edu.ifpr.irati.ads.TAD;
+package br.edu.ifpr.irati.ads;
 
 import java.util.Objects;
 

@@ -1,79 +1,70 @@
-package br.edu.ifpr.irati.ads.TAD;
+package br.edu.ifpr.irati.ads;
 
-// Controlamos como o Array vai aparecer usando o <>
-public class Array<T> implements iArray<T> {
+public class ArrayObject {
 
     private Object[] entities;
     private int maxEntries;
     private int numEntries;
 
-    public Array() {
+    public ArrayObject() {
         this.maxEntries = 50;
         this.numEntries = 0;
         this.entities = new Object[this.maxEntries];
     }
 
-    public Array(int maxEntries) {
+    public ArrayObject(int maxEntries) {
         this.maxEntries = maxEntries;
         this.numEntries = 0;
         this.entities = new Object[this.maxEntries];
     }
 
-    @Override
-    public void add(T entity) throws OverflowException {
+    public void add(Object entity) throws OverflowException {
         if (isFull()) throw new OverflowException("Array cheio");
         entities[numEntries++] = entity;
     }
 
-    @Override
-    public void remove(T entity) throws NotFoundException {
+    public void remove(Object entity) throws NotFoundException {
         int i = indexOf(entity);
         if (i == -1) {
             throw new NotFoundException("Objeto não encontrado.");
         }
-        for (int j = i + 1; j < size(); j++) {
-            this.entities[j - 1] = this.entities[j];
+        for (int j = i + 1; j < size(); j++){
+            this.entities[j-1] = this.entities[j];
         }
         this.numEntries--;
     }
 
-    @Override
-    public int indexOf(T entity) {
-        for (int i = 0; i < numEntries; i++) {
-            if (this.entities[i].equals(entity)) {
+    public int indexOf(Object entity){
+        for (int i = 0; i < numEntries; i++){
+            if (this.entities[i].equals(entity)){
                 return i;
             }
         }
         return -1;
     }
 
-    @Override
-    public T get(int i) throws NotFoundException {
-        if (i >= numEntries) {
+    public Object get(int i) throws NotFoundException{
+        if (i >= numEntries){
             throw new NotFoundException("Posição inválida");
         }
-        return (T) this.entities[i];
+        return this.entities[i];
     }
 
-    @Override
-    public boolean isEmpty() {
+    public boolean isEmpty(){
         return numEntries == 0;
     }
 
-    @Override
-    public boolean isFull() {
+    public boolean isFull(){
         return numEntries == maxEntries;
     }
 
-    @Override
-    public int size() {
+    public int size(){
         return numEntries;
     }
 
-    @Override
-    public String toString() {
+    public String toString(){
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < size(); i++){
             sb.append(this.entities[i]);
             sb.append("\n");
         }

@@ -1,5 +1,6 @@
-package br.edu.ifpr.irati.ads.sort;
+package br.edu.ifpr.irati.ads;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
 
@@ -9,10 +10,8 @@ public class Embaralhamento {
      * Algoritmo de Fisher e Yates para embaralhamento,
      * versão de Richard Durstenfeld, de 1964. Popularizada
      * por Donald E. Knuth no livro The Art of Computer Programing
-     *
      * @param a
-     */
-
+    */
     public static void shuffle(int[] a) {
         Random random = new Random(new Date().getTime());
         for (int i = a.length - 1; i >= 1; i--) {
@@ -22,5 +21,16 @@ public class Embaralhamento {
             a[j] = aux;
         }
     }
+
+    public static void main(String[] args) {
+
+        int[] a = {1, 2, 7, 9, 10, 12};
+        shuffle(a);
+        System.out.println(Arrays.toString(a));
+
+    }
+
+
 }
+
 

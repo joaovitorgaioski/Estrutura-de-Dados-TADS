@@ -1,4 +1,4 @@
-package br.edu.ifpr.irati.ads.TAD;
+package br.edu.ifpr.irati.ads;
 
 import java.util.Objects;
 
@@ -35,7 +35,10 @@ public class Partida {
 
     @Override
     public String toString() {
-        return nome + ", " + score;
+        return "Partida{" +
+                "nome='" + nome + '\'' +
+                ", score=" + score +
+                '}';
     }
 
     @Override

@@ -1,9 +1,9 @@
-package br.edu.ifpr.irati.ads.TAD;
+package br.edu.ifpr.irati.ads;
 
-// Interface irá implementar os métodos mínimos
-public interface iArray<T> {
+import java.util.Comparator;
 
-    // Isso obriga que o metodo add tenha esse throws
+public interface IArray<T> {
+
     public void add(T entity) throws OverflowException;
 
     public void remove(T entity) throws NotFoundException;
@@ -17,4 +17,9 @@ public interface iArray<T> {
     public boolean isFull();
 
     public int size();
+
+    public void sort(Comparator<T> comparator);
+
+    public void sort(SortAlgorithm algorithm, Comparator<T> comparator);
+
 }

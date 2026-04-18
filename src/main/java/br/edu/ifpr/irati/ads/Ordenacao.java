@@ -1,4 +1,4 @@
-package br.edu.ifpr.irati.ads.sort;
+package br.edu.ifpr.irati.ads;
 
 import java.util.Arrays;
 
