@@ -20,6 +20,7 @@ public interface IArray<T> {
 
     public void sort(Comparator<T> comparator);
 
-    public void sort(SortAlgorithm algorithm, Comparator<T> comparator);
+    public void sort(SortAlgorithm algorithm, Order order, Comparator<T> comparator);
 
+    public void shuffle();
 }

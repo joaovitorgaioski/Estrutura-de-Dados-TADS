@@ -20,8 +20,8 @@ public class AvaliacaoPerformance {
 
     public static void main(String[] args) throws OverflowException {
 
-        int N = 32000;
-        int trials = 20;
+        int N = 100;
+        int trials = 5;
         int warmup = 3;
         int inf = -2*N;
         int sup = 2*N;
@@ -52,19 +52,19 @@ public class AvaliacaoPerformance {
 
             System.out.println("Ordenando com o BubbleSort...");
             tempoInicio = System.nanoTime();
-            arrayB.sort(SortAlgorithm.BUBBLESORT, comparator);
+            arrayB.sort(SortAlgorithm.BUBBLESORT, Order.ASC, comparator);
             tempoFinal = System.nanoTime();
             tB[t] = tempoFinal - tempoInicio;
 
             System.out.println("Ordenando com o SelectionSort...");
             tempoInicio = System.nanoTime();
-            arrayS.sort(SortAlgorithm.SELECTIONSORT, comparator);
+            arrayS.sort(SortAlgorithm.SELECTIONSORT, Order.ASC, comparator);
             tempoFinal = System.nanoTime();
             tS[t] = tempoFinal - tempoInicio;
 
             System.out.println("Ordenando com o InsertionSort...");
             tempoInicio = System.nanoTime();
-            arrayI.sort(SortAlgorithm.INSERTIONSORT, comparator);
+            arrayI.sort(SortAlgorithm.INSERTIONSORT, Order.ASC, comparator);
             tempoFinal = System.nanoTime();
             tI[t] = tempoFinal - tempoInicio;
         }

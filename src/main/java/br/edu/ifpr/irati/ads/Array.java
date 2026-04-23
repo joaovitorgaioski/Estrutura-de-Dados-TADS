@@ -1,6 +1,8 @@
 package br.edu.ifpr.irati.ads;
 
 import java.util.Comparator;
+import java.util.Date;
+import java.util.Random;
 
 public class Array<T> implements IArray<T>{
 
@@ -73,15 +75,26 @@ public class Array<T> implements IArray<T>{
 
     @Override
     public void sort(Comparator<T> comparator) {
-        bubbleSort(comparator);
+        bubbleSort(comparator, Order.ASC);
     }
 
     @Override
-    public void sort(SortAlgorithm algorithm, Comparator<T> comparator) {
+    public void sort(SortAlgorithm algorithm, Order order, Comparator<T> comparator) {
         switch (algorithm) {
-            case BUBBLESORT -> bubbleSort(comparator);
-            case SELECTIONSORT -> selectionSort(comparator);
-            case INSERTIONSORT -> insertionSort(comparator);
+            case BUBBLESORT -> bubbleSort(comparator, order);
+            case SELECTIONSORT -> selectionSort(comparator, order);
+            case INSERTIONSORT -> insertionSort(comparator, order);
+        }
+    }
+
+    @Override
+    public void shuffle() {
+        Random random = new Random(new Date().getTime());
+        for (int i = this.size() - 1; i >= 1; i--) {
+            int j = random.nextInt(i);//entre 0 e o pivô sem incluir este último
+            Object aux = entities[i];
+            entities[i] = entities[j];
+            entities[j] = aux;
         }
     }
 
@@ -91,21 +104,36 @@ public class Array<T> implements IArray<T>{
         entities[j] = aux;
     }
 
-    private void bubbleSort(Comparator<T> comparator) {
-        for (int i = entities.length - 1; i >= 1; i--) {
+    private void bubbleSort(Comparator<T> comparator, Order order) {
+        for (int i = this.size() - 1; i >= 1; i--) {
+            boolean hasSwap = false;
+
             for (int j = 0; j < i; j++) {
-                if (comparator.compare( (T) entities[j], (T) entities[j + 1])  > 0) {
+                int comp = comparator.compare( (T) entities[j], (T) entities[j + 1]);
+
+                if (order.equals(Order.DESC))
+                    comp = -comp;
+
+                if (comp > 0) {
                     swap(j, j + 1);
+                    hasSwap = true;
                 }
             }
+
+            if (!hasSwap) return;
         }
     }
 
-    private void selectionSort(Comparator<T> comparator) {
-        for (int i = 0; i < entities.length - 1; i++) {
+    private void selectionSort(Comparator<T> comparator, Order order) {
+        for (int i = 0; i < this.size() - 1; i++) {
             int menor = i; //índice do menor
-            for (int j = i; j < entities.length; j++) {
-                if (comparator.compare( (T) entities[j], (T) entities[menor]) < 0) {
+            for (int j = i; j < this.size(); j++) {
+                int comp = comparator.compare((T) entities[j], (T) entities[menor]);
+
+                if (order.equals(Order.DESC))
+                    comp = -comp;
+
+                if (comp < 0) {
                     menor = j;
                 }
             }
@@ -113,10 +141,15 @@ public class Array<T> implements IArray<T>{
         }
     }
 
-    private void insertionSort(Comparator<T> comparator) {
-        for (int i = 1; i < entities.length; i++) {//gera o percorrimento dos pivôs
+    private void insertionSort(Comparator<T> comparator, Order order) {
+        for (int i = 1; i < this.size(); i++) {//gera o percorrimento dos pivôs
             for (int j = i - 1; j >= 0; j--) {//percorre entre o elemento anterior do pivô e a posição 0
-                if (comparator.compare( (T) entities[j + 1], (T) entities[j]) < 0) {//testa se o elemento da posição j+1 (no início corresponde ao pivo) é maior que o elemento anterior
+                int comp = comparator.compare( (T) entities[j + 1], (T) entities[j]);
+
+                if (order.equals(Order.DESC))
+                    comp = -comp;
+
+                if (comp < 0) {// testa se o elemento da posição j+1 (no início corresponde ao pivo) é maior que o elemento anterior
                     swap(j, j+1);
                 }
             }

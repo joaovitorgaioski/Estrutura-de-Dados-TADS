@@ -19,7 +19,7 @@ public class AppOrdenacao {
         System.out.println(array);
         PartidaComparator pComparator = new PartidaComparator();
         //array.sort(pComparator);
-        array.sort(SortAlgorithm.INSERTIONSORT, pComparator);
+        array.sort(SortAlgorithm.INSERTIONSORT, Order.ASC, pComparator);
         System.out.println(array);
     }
 
