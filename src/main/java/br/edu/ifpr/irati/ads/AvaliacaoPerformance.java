@@ -20,7 +20,7 @@ public class AvaliacaoPerformance {
 
     public static void main(String[] args) throws OverflowException {
 
-        int N = 100;
+        int N = 50000;
         int trials = 5;
         int warmup = 3;
         int inf = -2*N;
@@ -79,8 +79,5 @@ public class AvaliacaoPerformance {
         System.out.println("InsertionSort");
         System.out.println(Arrays.toString(tI));
         imprimirTempo(calcularMedia(tI));
-
-
     }
-
 }

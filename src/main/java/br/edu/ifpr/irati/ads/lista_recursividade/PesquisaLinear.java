@@ -14,6 +14,6 @@ public class PesquisaLinear {
     static void main(String[] args) {
         int[] vet = {4, 5, -1, -10, 7, 9, 2, 13, 18, -15, 11};
 
-        System.out.println(pesqLin(9, vet, 1, 4));
+        System.out.println(pesqLin(9, vet, 1, 6));
     }
 }
