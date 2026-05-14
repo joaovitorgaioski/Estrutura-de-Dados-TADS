@@ -7,6 +7,11 @@ public class Partida {
     private String nome;
     private double score;
 
+    public Partida(String nome) {
+        this.nome = nome;
+        this.score = 0;
+    }
+
     public Partida() {
         this.nome = "";
         this.score = 0;

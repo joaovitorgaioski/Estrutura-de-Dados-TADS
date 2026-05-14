@@ -22,5 +22,7 @@ public interface IArray<T> {
 
     public void sort(SortAlgorithm algorithm, Order order, Comparator<T> comparator);
 
+    public int binarySearch(T entity, Comparator<T> comparator);
+
     public void shuffle();
 }

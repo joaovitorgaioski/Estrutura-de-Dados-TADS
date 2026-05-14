@@ -88,6 +88,12 @@ public class Array<T> implements IArray<T>{
     }
 
     @Override
+    public int binarySearch(T entity, Comparator<T> comparator) {
+        sort(comparator);
+        return binarySearch(entity, 0, this.size() - 1, comparator);
+    }
+
+    @Override
     public void shuffle() {
         Random random = new Random(new Date().getTime());
         for (int i = this.size() - 1; i >= 1; i--) {
@@ -154,6 +160,17 @@ public class Array<T> implements IArray<T>{
                 }
             }
         }
+    }
+
+    public int binarySearch(T entity, int start, int end, Comparator<T> comparator) {
+        int mid = (start + end) / 2;
+
+        if (comparator.compare(entity, (T) this.entities[mid]) == 0) return mid;
+        if (start > end) return -1;
+        if (comparator.compare(entity, (T) this.entities[mid]) < 0) return binarySearch(entity, start, mid - 1, comparator);
+        if (comparator.compare(entity, (T) this.entities[mid]) > 0) return binarySearch(entity, mid + 1, end, comparator);
+
+        return -1;
     }
 
     @Override
